@@ -2,7 +2,7 @@
 
 # t: minimalistic todo list for your command line
 
-**t** is a simple todo list written in shell. It stores your todo list in a simple text file (**~/todo.txt** by default).
+**t** is a simple todo list written in shell. It stores your tasks in a simple text file (`~/todo.txt` by default).
 
 ## Installation
 
@@ -21,5 +21,5 @@
 
 ## Credits
 
-**t** works pretty same as wandernauta's [t](https://github.com/wandernauta/t), which is a port of tsion's [do\_stuff](https://github.com/tsion/do_stuff). I just rewrote it to shell.
+**t** works pretty same as [wandernauta's **t**](https://github.com/wandernauta/t), which is a port of [tsion's **do\_stuff**](https://github.com/tsion/do_stuff). I just rewrote it to shell.
 
