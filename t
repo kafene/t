@@ -36,7 +36,7 @@ erase(){
 reorder(){
   echo "`dump | grep -o '[^0-9\. ].*' | nl -w 1 -s ". "`" > "$t"
 }
-dump(){ sort -n "$t"; }
+dump(){ sort -n "$t" | grep -v '^ *$'; }
 edit(){ exec "$EDITOR" "$t"; }
 count(){ wc -l "$t" | grep -o '^[0-9]'; }
 
