@@ -8,13 +8,17 @@ t="$HOME/todo.txt"
 # functions
 help(){
   cat << eof
+t: minimalistic todo list for your command line
+
 usage: t                # list unfinished tasks
        t Shave the cat  # add an item
        t 3              # erase the third item
        t -e             # open todo.txt in \$EDITOR.
-       t -h             # show this message
        t -r             # reorder the items
        t -c             # count the amount of items
+       t -h, --help     # show this message
+
+       # tip: you can use short opts without '-'
 eof
 }
 num(){
@@ -43,10 +47,10 @@ count(){ wc -l "$t" | grep -o '^[0-9]'; }
 # main
 touch "$t"
 case "$1" in
-  -h) help;;
-  -r) reorder;;
-  -c) count;;
-  -e) edit;;
+  -h|--help|h) help;;
+  -r|r) reorder;;
+  -c|c) count;;
+  -e|e) edit;;
   '') dump;;
   *[!0-9]*) add "$*";;
    *) erase "$1";;

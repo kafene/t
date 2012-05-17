@@ -11,13 +11,15 @@
 
 ## Usage
 
-    t                # list all tasks
+    t                # list unfinished tasks
     t Shave the cat  # add an item
-    t 2              # erase the second item
+    t 3              # erase the third item
     t -e             # open todo.txt in $EDITOR.
-    t -h             # show this help
     t -r             # reorder the items
     t -c             # count the amount of items
+    t -h, --help     # show this message
+    
+    # tip: you can use short opts without '-'
 
 ## Credits
 
