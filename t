@@ -29,7 +29,7 @@ add(){
 }
 erase(){
   s="`grep "^$1\." "$t"`"
-  test "$s" && echo "Erased #$1: $s" \
+  test "$s" && echo "Erased #$1: ${s#*. }" \
             || echo "There is no task #$1"
   echo "`grep -v "^$1\." "$t"`" > "$t"
 }
