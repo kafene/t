@@ -17,7 +17,7 @@ t(){ sort -n "$f" | grep -v '^ *$'; }
 n(){ i=1; while grep -q "^$i\\." "$f"; do i=`expr $i + 1`; done; echo $i; }
 r(){ echo "`t | grep -o '[^0-9\. ].*' | nl -w 1 -s ". "`" > "$f"; }
 e(){ exec "${EDITOR:-vi}" "$f"; }
-c(){ wc -l "$f" | grep -o '^[0-9]'; }
+c(){ wc -l "$f" | grep -o '^[0-9]*'; }
 a(){
   echo "Added #`n`: $1"
   echo "`n`. $1" >> "$f"
