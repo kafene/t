@@ -17,22 +17,24 @@ t(){ sort -n "$f" | grep -v '^ *$'; }
 n(){ i=1; while grep -q "^$i\\." "$f"; do i=`expr $i + 1`; done; echo $i; }
 r(){ echo "`t | grep -o '[^0-9\. ].*' | nl -w 1 -s ". "`" > "$f"; }
 e(){ exec "${EDITOR:-vi}" "$f"; }
-c(){ wc -l "$f" | grep -o '^[0-9]*'; }
+c(){ t | wc -l | grep -o '^[0-9]*'; }
 a(){
   echo "Added #`n`: $1"
   echo "`n`. $1" >> "$f"
   echo "`t`" > "$f"
 }
 d(){
-  s="`grep "^$1\." "$f"`"
-  test "$s" && echo "Erased #$1: ${s#*. }" \
-            || echo "There is no task #$1"
-  echo "`grep -v "^$1\." "$f"`" > "$f"
+  for i in $1; do
+    s="`grep "^$i\." "$f"`"
+    test "$s" && echo "Deleted #$i: ${s#*. }" \
+              || echo "There is no task #$i"
+    echo "`grep -v "^$i\." "$f"`" > "$f"
+  done
 }
-test -f "$f" || touch "$t"
-case "$1" in
-  ''|e|r|c) ${1:-t};;
+test -f "$f" || touch "$f"
+case "$*" in
+  ''|e|r|c) ${*:-t};;
   -h|--help) h;;
-  *[!0-9]*) a "$*";;
-  *) d "$1";;
+  *[!0-9\ ]*) a "$*";;
+  *) d "$*";;
 esac
