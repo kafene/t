@@ -12,13 +12,12 @@ It stores your tasks in a plain text file (`~/todo.txt` by default).
 
 ## Usage
 
-    t                # show list
-    t Wash the car   # add item
-    t 2              # delete second item
-    t e              # open in editor
-    t r              # reorder items
-    t c              # count items
-    t -h, --help     # show this message
+    t                 # show list
+    t Buy milk +shop  # add item with tag
+    t +shop           # list items tagged +shop
+    t 1 2             # delete first and second item
+    t e               # open in editor
+    t -h, --help      # show this message
 
 ## Credits
 

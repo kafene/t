@@ -3,38 +3,29 @@
 # http://github.com/unu/t
 
 f="$HOME/todo.txt"
-h(){
-  echo "t: minimalistic todo list for your command line
-usage: t                # show list
-       t Wash the car   # add item
-       t 2              # delete second item
-       t e              # open in editor
-       t r              # reorder items
-       t c              # count items
-       t -h, --help     # show this message"
-}
-t(){ sort -n "$f" | grep -v '^ *$'; }
-n(){ i=1; while grep -q "^$i\\." "$f"; do i=$(expr $i + 1); done; echo $i; }
-r(){ echo "$(t | grep -o '[^0-9\. ].*' | nl -w 1 -s ". ")" > "$f"; }
-e(){ exec "${EDITOR:-vi}" "$f"; }
-c(){ t | wc -l | grep -o '^[0-9]*'; }
-a(){
-  echo "Added #$(n): $1"
-  echo "$(n). $1" >> "$f"
-  echo "$(t)" > "$f"
-}
-d(){
-  for i in $1; do
-    s="$(grep "^$i\." "$f")"
-    test "$s" && echo "Deleted #$i: ${s#*. }" \
-              || echo "There is no task #$i"
-    echo "$(grep -v "^$i\." "$f")" > "$f"
-  done
+h() echo "t: minimalistic todo list for your command line
+usage: t                 # show list
+       t Buy milk +shop  # add item with tag
+       t +shop           # list items tagged +shop
+       t 1 2             # delete first and second item
+       t e               # open in editor
+       t -h, --help      # show this message"
+t(){ nl -w 3 -s ". " -b a "$f" | grep -v '^[0-9\. ]*$'; } # dump
+r(){ echo "$(grep -v '^ *$' "$f")" > "$f"; } # reorder
+clr(){ sed 's/\([0-9]*\)\./[1;34m\1[m/g; s/\(+[^ ]*\)/[36m\1[m/g'; } # colors
+del(){ # delete
+  s="$(t | grep "^ *$1\.")"
+  if test "$s"; then
+    echo "$(head "$f" -n $(($1-1)); echo; tail "$f" -n +$(($1+1)))" > "$f"
+    echo "Deleted #$1: ${s#*. }"
+  else echo "There is no task #$1"; fi
 }
 test -f "$f" || touch "$f"
 case "$*" in
-  ''|[rec]) ${*:-t};;
-  -h|--help) h;;
-  *[!0-9\ ]*) a "$*";;
-  *) d "$*";;
+  -h|--help)  h;; # help
+  '')         r; t | clr;; # list
+  e)          r; exec "${EDITOR:-vi}" "$f";; # editor
+  +*)         r; t | sed 's/$/ /' | grep "$1 " | clr;; # tag
+  *[!0-9\ ]*) echo "$*" >> "$f"; echo "Added #$(cat "$f" | wc -l): $*"; r;; # add
+  *)          for i in $*; do del "$i"; done;; # delete
 esac
