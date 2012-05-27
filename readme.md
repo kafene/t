@@ -12,12 +12,17 @@ It stores your tasks in a plain text file (`~/todo.txt` by default).
 
 ## Usage
 
-    t                 # show list
-    t Buy milk +shop  # add item with tag
-    t +shop           # list items tagged +shop
-    t 1 2             # delete first and second item
+    t                 # show all items
+    t Buy milk +shop  # add item with tag +shop
+    t +shop +city     # list tags +shop and +city
+    t 2 4             # delete items 2 and 4
     t e               # open in editor
-    t -h, --help      # show this message
+    t h               # show this help
+
+In bash you can use:
+
+    t {5..9}          # delete items 5-9
+
 
 ## Credits
 
