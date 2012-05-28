@@ -16,15 +16,18 @@ It stores your tasks in a plain text file (`~/todo.txt` by default).
     t Buy milk +shop  # add item with tag +shop
     t +shop +city     # list tags +shop and +city
     t 2 4             # delete items 2 and 4
-    t e               # open in editor
-    t h               # show this help
+    t -e              # open list in editor
+    t -d              # edit source code (develop)
+    t -h              # show this help
 
-In bash you can use:
+## Tips
 
-    t {5..9}          # delete items 5-9
-
+- You can use `[edh]` without `-`.
+- For deleting items 3-7 use: `t $(seq 3 7)`.  
+  In bash you can use: `t {3..7}`.
 
 ## Credits
 
 **t** is inspired by [wandernauta's **t**](http://github.com/wandernauta/t),
 which is a port of [tsion's **do\_stuff**](http://github.com/tsion/do_stuff).
+
