@@ -69,7 +69,7 @@ tags(){ # show all tags
 }
 tag(){ # list selected tags
   for i in $(echo "$*" | sed 's/+/ /g'); do
-    t | sed 's/$/ /' | grep "+$i[^a-zA-Z] "
+    t | sed 's/$/ /' | grep "+$i[^a-zA-Z]"
   done | sort -du | clr
 }
 
