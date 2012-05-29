@@ -41,3 +41,7 @@ In **t** you can tag your tasks and then list one or more +tags. There is two li
         
         alias te="t -e"`
 
+- If you want something more simple, try [wandernauta's **t**][wt] or [tsion's **do\_stuff**][do_stuff].
+
+[wt]: http://github.com/wandernauta/t
+[do_stuff]: http://github.com/tsion/do_stuff
