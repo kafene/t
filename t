@@ -8,8 +8,8 @@ h(){
   cat << eof
 t: minimalistic todo list for your command line
 usage:
-    t                 # show all items
-    t Buy milk +shop  # add item with tag +shop
+    t                 # show todo list
+    t Buy milk +shop  # add item with tag
     t 2 4             # delete items 2 and 4
 
     t +shop +city     # list tags +shop and +city

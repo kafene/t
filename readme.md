@@ -12,8 +12,10 @@ It stores your tasks in a plain text file (`~/todo.txt` by default).
 
 ## Usage
 
-    t                 # show all items
-    t Buy milk +shop  # add item with tag +shop
+In **t** you can tag your tasks and then list one or more +tags. There is two lists – *todo* and *maybe*. Items ending by "?" are in the *maybe* list.
+
+    t                 # show todo list
+    t Buy milk +shop  # add item with tag
     t 2 4             # delete items 2 and 4
 
     t +shop +city     # list tags +shop and +city
@@ -31,11 +33,11 @@ It stores your tasks in a plain text file (`~/todo.txt` by default).
 ## Tips
 
 - You can use `[edh]` without `-`.
-- For deleting items 3-7 use: `t $(seq 3 7)`.  
-  In bash you can use: `t {3..7}`.
+- For deleting items 3-7 in bash, use:
 
-## Credits
+        t {3..7}
 
-**t** is inspired by [wandernauta's **t**](http://github.com/wandernauta/t),
-which is a port of [tsion's **do\_stuff**](http://github.com/tsion/do_stuff).
+- If you open list in editor often, add this to to your startup script:
+        
+        alias te="t -e"`
 
