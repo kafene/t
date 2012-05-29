@@ -14,8 +14,16 @@ It stores your tasks in a plain text file (`~/todo.txt` by default).
 
     t                 # show all items
     t Buy milk +shop  # add item with tag +shop
-    t +shop +city     # list tags +shop and +city
     t 2 4             # delete items 2 and 4
+
+    t +shop +city     # list tags +shop and +city
+    t +               # show used tags
+    
+    t Parachute ?     # add item to maybe list
+    t ?               # show maybe list
+    t 1?              # move item 1 to maybe list
+    t 3!              # move item 3 to todo list
+
     t -e              # open list in editor
     t -d              # edit source code (develop)
     t -h              # show this help
