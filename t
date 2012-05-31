@@ -20,6 +20,7 @@ usage:
     t 1?              # move item 1 to maybe list
     t 3!              # move item 3 to todo list
 
+    t -a              # show all (todo + maybe)
     t -e              # open list in editor
     t -d              # edit source code (develop)
     t -h              # show this help
@@ -78,11 +79,12 @@ test -f "$f" || touch "$f"
 case "$*" in
   '')   r; t | grep -v '\?$' | clr;; # todo
   '?')  r; t | grep '\?$' | clr;;    # maybe
+  a|-a) r; t | clr;;                 # all
   e|-e) r; edit "$f";;               # edit
   d|-d) edit "$0";;                  # develop
   h|-*) h;;                          # help
   +)    tags;;                       # tags
   +*)   r; tag "$*";;                # tag
   *[!0-9\ \?\!]*) add "$*"; r;;      # add
-  *)    move "$*";;                   # delete
+  *)    move "$*";;                  # delete
 esac
