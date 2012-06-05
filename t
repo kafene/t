@@ -37,7 +37,7 @@ edit(){ # open editor
   exec "${EDITOR:-vi}" "$1"
 }
 clr(){ # add colors
-  sed 's/\([0-9]\+\) /'$num'\1'$def' /g; s/\(+[a-zA-Z]\+\)/'$tag'\1'$def'/g'
+  sed 's/^\( *[0-9]\+\) /'$num'\1'$def' /g; s/\(+[a-zA-Z]\+\)/'$tag'\1'$def'/g'
 }
 add(){ # add item
   echo "$*" >> "$f";
