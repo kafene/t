@@ -26,6 +26,7 @@ In **t** you can tag your tasks and then list one or more +tags. There is two li
     t 1?              # move item 1 to maybe list
     t 3!              # move item 3 to todo list
 
+    t -a              # show all (todo + maybe)
     t -e              # open list in editor
     t -d              # edit source code (develop)
     t -h              # show this help
