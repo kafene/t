@@ -33,7 +33,7 @@ In **t** you can tag your tasks and then list one or more +tags. There is two li
 
 ## Tips
 
-- You can use `[edh]` without `-`.
+- You can type one letter options without dash.
 - For deleting items 3-7 in bash, use:
 
         t {3..7}
