@@ -2,7 +2,7 @@
 # http://github.com/unu/t
 
 f="$HOME/todo.txt"
-def="[m"; gre="[1;32m"; red="[1;31m"; ora="[33m"
+def="[m"; green="[1;32m"; red="[1;31m"; orange="[33m"; gray="[36m"
 usage(){
   cat << eof
 t: minimalistic todo list for your command line
@@ -20,11 +20,11 @@ eof
 todo(){ grep -v '\?$' "$f" | grep -v '^ *$'; }
 maybe(){ grep '\?$' "$f"; }
 reorder(){ echo "$(todo && maybe)" > "$f"; }
-indent(){ sed 's/^/  /'; }
+indent(){ sed 's/^/  /; s/\(+[a-z]*\)/'$gray'\1'$def'/g'; }
 remove(){
   match="$(grep "$*" "$f")"
-  test "$match" || exec echo "${ora}NOT FOUND$def"
-  test "$(echo "$match" | wc -l)" = 1 || exec echo "$ora$match$def"
+  test "$match" || exec echo "${orange}NOT FOUND$def"
+  test "$(echo "$match" | wc -l)" = 1 || exec echo "$orange$match$def"
   echo "$(grep -v "$*" "$f")" >  "$f" && echo "$red$match$def"
 }
 
@@ -35,7 +35,7 @@ case "$*" in
   \?) maybe | indent;;
   a) (todo && maybe) | indent;;
   e) reorder; "${EDITOR:-vi}" "$f";;
-  [/+]*) grep "${*#/}" "$f" | indent;;
+  [/+]*) GREP_COLOR="1;35" grep --color=always "${*#/}" "$f" | indent;;
   -*) remove "${*#-}" | indent;;
-  *) echo "$*" >> "$f" && echo "$gre$*$def" | indent && reorder;;
+  *) echo "$*" >> "$f" && echo "$green$*$def" | indent && reorder;;
 esac
