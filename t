@@ -22,10 +22,10 @@ maybe(){ grep '\?$' "$f"; }
 reorder(){ echo "$(todo && maybe)" > "$f"; }
 indent(){ sed 's/^/  /; s/\(+[a-z]*\)/'$gray'\1'$def'/g'; }
 remove(){
-  match="$(grep "$*" "$f")"
+  match="$(grep -i "$*" "$f")"
   test "$match" || exec echo "${orange}NOT FOUND$def"
   test "$(echo "$match" | wc -l)" = 1 || exec echo "$orange$match$def"
-  echo "$(grep -v "$*" "$f")" >  "$f" && echo "$red$match$def"
+  echo "$(grep -iv "$*" "$f")" > "$f" && echo "$red$match$def"
 }
 
 test -f "$f" || touch "$f"
@@ -35,7 +35,7 @@ case "$*" in
   \?) maybe | indent;;
   a) (todo && maybe) | indent;;
   e) reorder; "${EDITOR:-vi}" "$f";;
-  [/+]*) GREP_COLOR="1;35" grep --color=always "${*#/}" "$f" | indent;;
+  [/+]*) GREP_COLOR="1;35" grep -i --color=always "${*#/}" "$f" | indent;;
   -*) remove "${*#-}" | indent;;
   *) echo "$*" >> "$f" && echo "$green$*$def" | indent && reorder;;
 esac
